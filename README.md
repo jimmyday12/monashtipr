@@ -14,9 +14,12 @@ competition.
 
 And the development version from [GitHub](https://github.com/) with:
 
-    #> Using github PAT from envvar GITHUB_PAT
-    #> Skipping install of 'monashtipr' from a github remote, the SHA1 (9d89a947) has not changed since last install.
-    #>   Use `force = TRUE` to force installation
+``` r
+# install.packages("devtools")
+devtools::install_github("jimmyday12/monash_tipr")
+#> Using github PAT from envvar GITHUB_PAT
+#> Downloading GitHub repo jimmyday12/monash_tipr@master
+```
 
 ## Workflow
 
