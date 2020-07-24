@@ -87,22 +87,36 @@ set_away_checkbox <- function(form) {
   return(form)
 }
 
+#' Title
+#'
+#' @param games_tbl 
+#' @param form 
+#' @param comp 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 convert_tips_to_form <- function(games_tbl, form, comp) {
   
   if (comp == "info") {
     prob_list <- extract_prob(games_tbl)
     params_list <- prob_list
-    return(exec(rvest::set_values, form = form, !!!params_list))
+    return(rlang::exec(rvest::set_values, form = form, !!!params_list))
   } else {
     margin_list <- extract_margin(games_tbl)
     game_list <- extract_games(games_tbl)
-    params_list <- c(margin_list, game_list)
+    
     games_tbl$Margin <- abs(games_tbl$Margin)
+    margin_list <- extract_margin(games_tbl)
+    
+    params_list <- c(margin_list, game_list)
+    
     if ( comp == "gauss") {
       std_list <- extract_std(games_tbl)
       params_list <- c(params_list, std_list)
     }
-    form_filled <- exec(rvest::set_values, form = form, !!!params_list)
+    form_filled <- rlang::exec(rvest::set_values, form = form, !!!params_list)
     return(set_away_checkbox(form_filled))
   }
 

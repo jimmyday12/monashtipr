@@ -45,5 +45,9 @@ submit_tips <- function(games, user, pass, round, comp) {
   form_filled <- convert_tips_to_form(games, form_unfilled, comp)
   
   # submit
-  submit_form(sess, form_filled)
+  result <- rvest::submit_form(sess, form_filled)
+  result$response %>% 
+    httr::content() %>% 
+    rvest::html_node("h1+ table") %>% 
+    rvest::html_table()
 }

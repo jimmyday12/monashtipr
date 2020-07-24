@@ -11,4 +11,7 @@ RoxygenNote: 7.1.0
 Imports: 
     rvest,
     httr,
-    magrittr
+    magrittr,
+    rlang
+Suggests: 
+    testthat
