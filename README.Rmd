@@ -18,43 +18,57 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of monashtipr is to ...
+The goal of monashtipr is to provide an API to the Monash AFL Tipping competition.
 
 ## Installation
 
-You can install the released version of monashtipr from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-#install.packages("monashtipr")
-```
-
 And the development version from [GitHub](https://github.com/) with:
 
-``` r
+``` {r, echo = FALSE}
 # install.packages("devtools")
-#devtools::install_github("jimmyday12/monash_tipr")
+devtools::install_github("jimmyday12/monash_tipr")
 ```
-## Example
+## Workflow
 
-This is a basic example which shows you how to solve a common problem:
+The main workflow is to grab the games for the upcoming round, edit the tips related to the competition and then submit them. 
 
-```{r example}
-#library(monashtipr)
-## basic example code
-```
+First we pull down the games. I've chosen to store my password and username in an Renviron file here to keep them secret, but you could pass these in via plain text. Read up on options for this [here](https://cran.r-project.org/web/packages/httr/vignettes/secrets.html)
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+```{r store_password}
+library(monashtipr)
 
-```{r cars}
-summary(cars)
-```
+# Store password and username
+# If wanted - store user/password in Renviron file
+# e.g. you can run `usethis::edit_r_environ()` and edit them
+# MONASH_USER = xxx
+# MONASH_PASS = xxx
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+user <- Sys.getenv("MONASH_USER")
+pass =  Sys.getenv("MONASH_PASS")
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+Now we can pull games. 
+```{r get_games}
+comp = "normal"
+round = 8
+games <- monashtipr::get_round_games(user, pass, round, comp)
+
+games
+```
+
+Next - we edit the games data frame to add our tips. How you do this will vary by how you actually store your tips - you might do a join with your existing model output for example. I'll leave that up to the user. A simple example would be to provide a vector of margins. 
+
+Please note - these should always be the margin tip of the HOME TEAM.
+
+```{r add_tips}
+games$Margin <- c(1, 6, 4, 4, 20, -1, -2, -12, -7)
+games
+```
+
+Now we just pass this back with our original credentials and we are good to go! 
+
+```{r submit_tips}
+submit_tips(games, user, pass, round, comp)
+```
+
