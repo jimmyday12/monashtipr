@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg)](https://codecov.io/gh/jimmyday12/monash_tipr?branch=master)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 The goal of monashtipr is to provide an API to the Monash AFL Tipping competition.
@@ -53,7 +54,7 @@ Now we can pull games.
 ```{r get_games}
 comp = "normal"
 round = 8
-games <- monashtipr::get_round_games(user, pass, round, comp)
+games <- get_current_games(user, pass, comp = comp, round = round)
 
 games
 ```
@@ -67,9 +68,9 @@ games$Margin <- c(1, 6, 4, 4, 20, -1, -2, -12, -7)
 games
 ```
 
-Now we just pass this back with our original credentials and we are good to go! 
+Now we just pass this back with our original credentials and we are good to go! =
 
-```{r submit_tips}
-submit_tips(games, user, pass, round, comp)
+```{r submit_tips, eval=FALSE, include=TRUE}
+submit_tips(games, user, pass, round = round, comp = comp)
 ```
 

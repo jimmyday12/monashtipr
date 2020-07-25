@@ -14,7 +14,9 @@ Imports:
     magrittr,
     rlang,
     xml2,
-    glue
+    glue,
+    lifecycle
 Suggests: 
     testthat,
     covr
+RdMacros: lifecycle

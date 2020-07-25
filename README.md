@@ -7,6 +7,8 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg)](https://codecov.io/gh/jimmyday12/monash_tipr?branch=master)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 The goal of monashtipr is to provide an API to the Monash AFL Tipping
@@ -20,7 +22,8 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("jimmyday12/monash_tipr")
 #> Using github PAT from envvar GITHUB_PAT
-#> Downloading GitHub repo jimmyday12/monash_tipr@master
+#> Skipping install of 'monashtipr' from a github remote, the SHA1 (edcf885f) has not changed since last install.
+#>   Use `force = TRUE` to force installation
 ```
 
 ## Workflow
@@ -51,7 +54,9 @@ Now we can pull games.
 ``` r
 comp = "normal"
 round = 8
-games <- monashtipr::get_round_games(user, pass, round, comp)
+games <- get_current_games(user, pass, comp = comp, round = round)
+#> Login succesfull!
+#> Returning current rounds games below...
 
 games
 #>   Game           Ground       Home        Away Margin
@@ -89,19 +94,8 @@ games
 ```
 
 Now we just pass this back with our original credentials and we are good
-to go\!
+to go\! =
 
 ``` r
-submit_tips(games, user, pass, round, comp)
-#> Submitting with '.submit'
-#>   Game        Team Margin              Status
-#> 1    1  Gold_Coast      1 Too late! (skipped)
-#> 2    2  G_W_Sydney      6 Too late! (skipped)
-#> 3    3   Kangaroos      4            Updated.
-#> 4    4      Sydney      4            Updated.
-#> 5    5  P_Adelaide     20            Updated.
-#> 6    6    Essendon      1            Updated.
-#> 7    7 Collingwood      2            Updated.
-#> 8    8    Brisbane     12            Updated.
-#> 9    9     Geelong      7            Updated.
+submit_tips(games, user, pass, round = round, comp = comp)
 ```
