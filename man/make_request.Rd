@@ -4,15 +4,9 @@
 \alias{make_request}
 \title{Title}
 \usage{
-make_request(user = NULL, pass = NULL, round = NULL, comp = NULL)
+make_request(user, pass, comp)
 }
 \arguments{
-\item{user}{}
-
-\item{pass}{}
-
-\item{round}{}
-
 \item{comp}{}
 }
 \value{

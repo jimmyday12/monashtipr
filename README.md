@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Codecov test
+coverage](https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg)](https://codecov.io/gh/jimmyday12/monash_tipr?branch=master)
 <!-- badges: end -->
 
 The goal of monashtipr is to provide an API to the Monash AFL Tipping
@@ -94,7 +96,7 @@ submit_tips(games, user, pass, round, comp)
 #> Submitting with '.submit'
 #>   Game        Team Margin              Status
 #> 1    1  Gold_Coast      1 Too late! (skipped)
-#> 2    2  G_W_Sydney      6            Updated.
+#> 2    2  G_W_Sydney      6 Too late! (skipped)
 #> 3    3   Kangaroos      4            Updated.
 #> 4    4      Sydney      4            Updated.
 #> 5    5  P_Adelaide     20            Updated.

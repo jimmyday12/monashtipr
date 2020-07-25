@@ -12,6 +12,9 @@ Imports:
     rvest,
     httr,
     magrittr,
-    rlang
+    rlang,
+    xml2,
+    glue
 Suggests: 
-    testthat
+    testthat,
+    covr

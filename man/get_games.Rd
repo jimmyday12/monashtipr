@@ -4,7 +4,7 @@
 \alias{get_games}
 \title{Title}
 \usage{
-get_games(request)
+get_games(req)
 }
 \arguments{
 \item{request}{}
