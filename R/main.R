@@ -1,9 +1,9 @@
 
 
 #' Get Games
-#' 
-#' get_current_games provides an API to return the current rounds matches in a data frame. 
-#' 
+#'
+#' get_current_games provides an API to return the current rounds matches in a data frame.
+#'
 #'
 #' @param user monash username, in text
 #' @param pass monash password, in text
@@ -18,7 +18,6 @@
 #' get_games(user, pass, comp)
 #' }
 get_games <- function(user, pass, comp, round = NULL) {
-  
   if (is.null(round)) get_current_round(user, pass)
   # make request
   requ <- make_request(user = user, pass = pass, comp = comp, round = round)
@@ -42,21 +41,20 @@ get_games <- function(user, pass, comp, round = NULL) {
 #' submit_tips(games, user, pass, comp)
 #' }
 submit_tips <- function(games, user, pass, comp, round = NULL) {
-
   if (is.null(round)) get_current_round(user, pass)
-  
+
   # make request
   sess <- create_session()
   requ <- make_request(user, pass, comp, round = round)
   form_unfilled <- get_form(requ)
-  
+
   # add new fields
   form_filled <- convert_tips_to_form(games, form_unfilled, comp)
-  
+
   # submit
   result <- rvest::submit_form(sess, form_filled)
-  result$response %>% 
-    httr::content() %>% 
-    rvest::html_node("h1+ table") %>% 
+  result$response %>%
+    httr::content() %>%
+    rvest::html_node("h1+ table") %>%
     rvest::html_table()
 }

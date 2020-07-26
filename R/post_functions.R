@@ -9,7 +9,7 @@ get_rounds <- function() {
   round_text <- xml2::read_html(url) %>%
     rvest::html_nodes("tr:nth-child(4) select") %>%
     rvest::html_text()
-  
+
   regmatches(round_text, gregexpr("[[:digit:]]+", round_text)) %>%
     unlist() %>%
     as.numeric()
@@ -23,10 +23,12 @@ get_rounds <- function() {
 #' @noRd
 get_current_round <- function(user, pass, rounds = get_rounds()) {
   valid_rounds <- rounds %>%
-    purrr::map(~make_request(user, pass, comp = "normal", round = ., verbose = FALSE)) %>%
+    purrr::map(~ make_request(user, pass, comp = "normal", round = ., verbose = FALSE)) %>%
     purrr::map_lgl(purrr::pluck, "table_exists")
-  
-  if (sum(valid_rounds) == 0) return("")
+
+  if (sum(valid_rounds) == 0) {
+    return("")
+  }
   min(rounds[valid_rounds])
 }
 
@@ -37,8 +39,7 @@ get_current_round <- function(user, pass, rounds = get_rounds()) {
 #'
 #' @noRd
 make_request <- function(user, pass, comp, round = NULL, verbose = TRUE) {
-  
-  if( is.null(round)) round <- get_current_round(user, pass)
+  if (is.null(round)) round <- get_current_round(user, pass)
   url <- "http://probabilistic-footy.monash.edu/~footy/cgi-bin/presentTips.cgi.pl"
   params <- list(name = user, passwd = pass, round = round, comp = comp)
 
@@ -50,7 +51,7 @@ make_request <- function(user, pass, comp, round = NULL, verbose = TRUE) {
   req <- httr::POST(url, body = params, encode = "form")
 
   req <- check_request(req)
-  
+
   if (verbose) rlang::inform(req$msg)
   return(req)
 }
@@ -64,7 +65,9 @@ make_request <- function(user, pass, comp, round = NULL, verbose = TRUE) {
 check_request <- function(req) {
 
   # check for table
-  tables_count <- httr::content(req) %>% rvest::html_nodes("form table") %>% length()
+  tables_count <- httr::content(req) %>%
+    rvest::html_nodes("form table") %>%
+    length()
   req$table_exists <- tables_count > 0
   if (req$table_exists) {
     req$msg <- "Login succesfull!" # Add tick
@@ -72,7 +75,6 @@ check_request <- function(req) {
     req$msg <- "Login failed - check username and password or that round is not in the past"
   }
   return(req)
-  
 }
 
 #' Get Games Table
@@ -84,10 +86,10 @@ check_request <- function(req) {
 get_games_tbl <- function(req) {
   if (req$table_exists) {
     rlang::inform("Returning current rounds games below...")
-  games_tbl <- httr::content(req) %>%
-    rvest::html_nodes("form table") %>%
-    rvest::html_table() %>%
-    .[[1]]
+    games_tbl <- httr::content(req) %>%
+      rvest::html_nodes("form table") %>%
+      rvest::html_table() %>%
+      .[[1]]
   } else {
     rlang::inform("Returning empty data frame")
     games_tbl <- data.frame()
@@ -103,10 +105,9 @@ get_games_tbl <- function(req) {
 #' @noRd
 get_form <- function(req) {
   if (req$table_exists) {
-    
     httr::content(req) %>%
-    rvest::html_node("form") %>%
-    rvest::html_form()
+      rvest::html_node("form") %>%
+      rvest::html_form()
   } else {
     rlang::abort("Invalid request made to `get_form`, most likely due to error in login credentials")
   }
@@ -122,10 +123,3 @@ create_session <- function() {
   url <- "http://probabilistic-footy.monash.edu/~footy/cgi-bin/presentTips.cgi.pl"
   rvest::html_session(url)
 }
-
-
-
-
-
-
-

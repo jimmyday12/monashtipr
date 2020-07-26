@@ -20,17 +20,17 @@ test_that("Request returns valid results", {
   req_gauss <- make_request(user, pass, comp = "gauss")
   req_info <- make_request(user, pass, comp = "info")
   req_invalid_round <- make_request(user, pass, comp = "info", round = get_current_round(user, pass) - 1)
-  
+
   expect_s3_class(req_norm, "response")
   expect_s3_class(req_gauss, "response")
   expect_s3_class(req_info, "response")
-  
+
   expect_s3_class(get_games_tbl(req_norm), "data.frame")
   expect_s3_class(get_games_tbl(req_gauss), "data.frame")
   expect_s3_class(get_games_tbl(req_info), "data.frame")
   expect_s3_class(get_games_tbl(req_invalid_round), "data.frame")
   expect_error(get_games_tbl("1"))
-  
+
   expect_s3_class(get_form(req_norm), "form")
   expect_s3_class(get_form(req_gauss), "form")
   expect_s3_class(get_form(req_info), "form")
@@ -41,4 +41,3 @@ test_that("Checking session works", {
   expect_s3_class(create_session(), "session")
   expect_error(create_session("1"))
 })
-
