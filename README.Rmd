@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg)](https://codecov.io/gh/jimmyday12/monash_tipr?branch=master)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R build status](https://github.com/jimmyday12/monash_tipr/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/monash_tipr/actions)
 <!-- badges: end -->
 
 The goal of monashtipr is to provide an API to the Monash AFL Tipping competition.
@@ -32,7 +33,7 @@ devtools::install_github("jimmyday12/monash_tipr")
 ```
 ## Workflow
 
-The main workflow is to grab the games for the upcoming round, edit the tips related to the competition and then submit them. 
+The two main functions are `get_games()` and `submit_tips`. The general workflow is to use `get_games()` to grab a data frame of the games from a particular round, edit/add your tips and then submit them to the Monash website using `submit_tips`.
 
 First we pull down the games. I've chosen to store my password and username in an Renviron file here to keep them secret, but you could pass these in via plain text. Read up on options for this [here](https://cran.r-project.org/web/packages/httr/vignettes/secrets.html)
 
@@ -53,8 +54,7 @@ pass =  Sys.getenv("MONASH_PASS")
 Now we can pull games. 
 ```{r get_games}
 comp = "normal"
-round = 8
-games <- get_current_games(user, pass, comp = comp, round = round)
+games <- get_games(user, pass, comp = comp)
 
 games
 ```
@@ -70,7 +70,7 @@ games
 
 Now we just pass this back with our original credentials and we are good to go! =
 
-```{r submit_tips, eval=FALSE, include=TRUE}
-submit_tips(games, user, pass, round = round, comp = comp)
+```{r submit_tips}
+submit_tips(games, user, pass, comp = comp)
 ```
 

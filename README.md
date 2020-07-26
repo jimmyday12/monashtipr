@@ -9,6 +9,8 @@
 coverage](https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg)](https://codecov.io/gh/jimmyday12/monash_tipr?branch=master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R build
+status](https://github.com/jimmyday12/monash_tipr/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/monash_tipr/actions)
 <!-- badges: end -->
 
 The goal of monashtipr is to provide an API to the Monash AFL Tipping
@@ -22,14 +24,16 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("jimmyday12/monash_tipr")
 #> Using github PAT from envvar GITHUB_PAT
-#> Skipping install of 'monashtipr' from a github remote, the SHA1 (edcf885f) has not changed since last install.
+#> Skipping install of 'monashtipr' from a github remote, the SHA1 (d25eb7b5) has not changed since last install.
 #>   Use `force = TRUE` to force installation
 ```
 
 ## Workflow
 
-The main workflow is to grab the games for the upcoming round, edit the
-tips related to the competition and then submit them.
+The two main functions are `get_games()` and `submit_tips`. The general
+workflow is to use `get_games()` to grab a data frame of the games from
+a particular round, edit/add your tips and then submit them to the
+Monash website using `submit_tips`.
 
 First we pull down the games. I’ve chosen to store my password and
 username in an Renviron file here to keep them secret, but you could
@@ -53,8 +57,7 @@ Now we can pull games.
 
 ``` r
 comp = "normal"
-round = 8
-games <- get_current_games(user, pass, comp = comp, round = round)
+games <- get_games(user, pass, comp = comp)
 #> Login succesfull!
 #> Returning current rounds games below...
 
@@ -97,5 +100,17 @@ Now we just pass this back with our original credentials and we are good
 to go\! =
 
 ``` r
-submit_tips(games, user, pass, round = round, comp = comp)
+submit_tips(games, user, pass, comp = comp)
+#> Login succesfull!
+#> Submitting with '.submit'
+#>   Game       Team Margin              Status
+#> 1    1 Gold_Coast      1 Too late! (skipped)
+#> 2    2 G_W_Sydney      6 Too late! (skipped)
+#> 3    3  Kangaroos      4 Too late! (skipped)
+#> 4    4     Sydney      4 Too late! (skipped)
+#> 5    5 P_Adelaide     20 Too late! (skipped)
+#> 6    6   Adelaide      1 Too late! (skipped)
+#> 7    7    W_Coast      2 Too late! (skipped)
+#> 8    8  Melbourne     12 Too late! (skipped)
+#> 9    9  Fremantle      7            Updated.
 ```
