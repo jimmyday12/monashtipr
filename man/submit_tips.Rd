@@ -4,7 +4,7 @@
 \alias{submit_tips}
 \title{Title}
 \usage{
-submit_tips(games, user, pass, comp)
+submit_tips(games, user, pass, comp, round = NULL)
 }
 \arguments{
 \item{games}{}

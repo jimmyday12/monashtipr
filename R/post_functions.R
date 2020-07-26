@@ -1,36 +1,44 @@
-#' Get Round
+#' Get Rounds
 #'
-#' Finds the current round.
+#' Internal function to finds all available rounds.
 #'
 #'
 #' @noRd
-get_max_round <- function() {
+get_rounds <- function() {
   url <- "http://probabilistic-footy.monash.edu/~footy/tips.shtml"
   round_text <- xml2::read_html(url) %>%
     rvest::html_nodes("tr:nth-child(4) select") %>%
     rvest::html_text()
-  matches <- regmatches(round_text, gregexpr("[[:digit:]]+", round_text)) %>%
+  
+  regmatches(round_text, gregexpr("[[:digit:]]+", round_text)) %>%
     unlist() %>%
     as.numeric()
-  
-  max(matches)
-  
 }
 
-#' Title
+#' Get Current Round
 #'
-#' @param user
-#' @param pass
-#' @param round
-#' @param comp
+#' Internal function to find the current round.
 #'
-#' @return
-#' @export
 #'
-#' @examples
-make_request <- function(user, pass, comp, round = NULL) {
+#' @noRd
+get_current_round <- function(user, pass, rounds = get_rounds()) {
+  valid_rounds <- rounds %>%
+    purrr::map(~make_request(user, pass, comp = "normal", round = ., verbose = FALSE)) %>%
+    purrr::map_lgl(purrr::pluck, "table_exists")
+  
+  if (sum(valid_rounds) == 0) return("")
+  min(rounds[valid_rounds])
+}
 
-  if( is.null(round)) round <- get_max_round()
+#' Make request
+#'
+#' FInternal function to make request
+#'
+#'
+#' @noRd
+make_request <- function(user, pass, comp, round = NULL, verbose = TRUE) {
+  
+  if( is.null(round)) round <- get_current_round(user, pass)
   url <- "http://probabilistic-footy.monash.edu/~footy/cgi-bin/presentTips.cgi.pl"
   params <- list(name = user, passwd = pass, round = round, comp = comp)
 
@@ -43,18 +51,16 @@ make_request <- function(user, pass, comp, round = NULL) {
 
   req <- check_request(req)
   
-  rlang::inform(req$msg)
+  if (verbose) rlang::inform(req$msg)
   return(req)
 }
 
-#' Title
+#' Check request
 #'
-#' @param req 
+#' Internal function to check the validity of a request object
 #'
-#' @return
-#' @export
 #'
-#' @examples
+#' @noRd
 check_request <- function(req) {
 
   # check for table
@@ -69,15 +75,13 @@ check_request <- function(req) {
   
 }
 
-#' Title
+#' Get Games Table
 #'
-#' @param request
+#' Internal function to return a table
 #'
-#' @return
-#' @export
 #'
-#' @examples
-get_games <- function(req) {
+#' @noRd
+get_games_tbl <- function(req) {
   if (req$table_exists) {
     rlang::inform("Returning current rounds games below...")
   games_tbl <- httr::content(req) %>%
@@ -91,26 +95,29 @@ get_games <- function(req) {
   return(games_tbl)
 }
 
-#' Title
+#' Get Form
 #'
-#' @param request
+#' Internal function to return a form object
 #'
-#' @return
-#' @export
 #'
-#' @examples
+#' @noRd
 get_form <- function(req) {
+  if (req$table_exists) {
+    
     httr::content(req) %>%
     rvest::html_node("form") %>%
     rvest::html_form()
+  } else {
+    rlang::abort("Invalid request made to `get_form`, most likely due to error in login credentials")
+  }
 }
 
-#' Title
+#' Create session
 #'
-#' @return
-#' @export
+#' Internal function to create a session
 #'
-#' @examples
+#'
+#' @noRd
 create_session <- function() {
   url <- "http://probabilistic-footy.monash.edu/~footy/cgi-bin/presentTips.cgi.pl"
   rvest::html_session(url)

@@ -1,6 +1,6 @@
 
 
-#' Get Current Games
+#' Get Games
 #' 
 #' get_current_games provides an API to return the current rounds matches in a data frame. 
 #' 
@@ -8,17 +8,19 @@
 #' @param user monash username, in text
 #' @param pass monash password, in text
 #' @param comp comp type, should be one of "normal", "gauss" or "info"
+#' @param round (optional),  round number to return. If not provided, will try find the current round.
 #'
 #' @return data.frame of the matches from the currently available tipping round
 #' @export
 #'
 #' @examples
-get_current_games <- function(user, pass, comp, round = NULL) {
+get_games <- function(user, pass, comp, round = NULL) {
   
+  if (is.null(round)) get_current_round(user, pass)
   # make request
-  requ <- make_request(user = user, pass = pass,comp = comp, round = round)
+  requ <- make_request(user = user, pass = pass, comp = comp, round = round)
   # get games
-  get_games(requ)
+  get_games_tbl(requ)
 }
 
 

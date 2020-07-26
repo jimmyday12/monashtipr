@@ -7,31 +7,38 @@ test_that("make_request fails with bad arguments", {
   expect_error(make_request(user, pass, comp = "test"))
 })
 
-test_that("get_max_round works", {
-  expect_error(get_max_round("1"))
-  expect_type(get_max_round(), "double")
+test_that("finding rounds works", {
+  expect_error(get_rounds("1"))
+  expect_type(get_rounds(), "double")
+  expect_error(get_current_round())
+  expect_type(get_current_round(user, pass), "double")
 })
 
 
-test_that("Request returns games", {
+test_that("Request returns valid results", {
   req_norm <- make_request(user, pass, comp = "normal")
   req_gauss <- make_request(user, pass, comp = "gauss")
   req_info <- make_request(user, pass, comp = "info")
+  req_invalid_round <- make_request(user, pass, comp = "info", round = get_current_round(user, pass) - 1)
   
   expect_s3_class(req_norm, "response")
   expect_s3_class(req_gauss, "response")
   expect_s3_class(req_info, "response")
   
+  expect_s3_class(get_games_tbl(req_norm), "data.frame")
+  expect_s3_class(get_games_tbl(req_gauss), "data.frame")
+  expect_s3_class(get_games_tbl(req_info), "data.frame")
+  expect_s3_class(get_games_tbl(req_invalid_round), "data.frame")
+  expect_error(get_games_tbl("1"))
   
-  expect_s3_class(get_games(req_norm), "data.frame")
-  expect_s3_class(get_games(req_gauss), "data.frame")
-  expect_s3_class(get_games(req_info), "data.frame")
-  
-  expect_error(get_games("1"))
+  expect_s3_class(get_form(req_norm), "form")
+  expect_s3_class(get_form(req_gauss), "form")
+  expect_s3_class(get_form(req_info), "form")
+  expect_error(get_form(req_invalid_round))
 })
 
-test_that("Get games works", {
-  expect_s3_class(get_current_games(user, pass, comp = "normal"), "data.frame")
-  expect_s3_class(get_current_games(user, pass, comp = "gauss"), "data.frame")
-  expect_s3_class(get_current_games(user, pass, comp = "info"), "data.frame")
+test_that("Checking session works", {
+  expect_s3_class(create_session(), "session")
+  expect_error(create_session("1"))
 })
+
