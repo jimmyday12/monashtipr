@@ -4,7 +4,7 @@
 \alias{get_games}
 \title{Get Games}
 \usage{
-get_games(user, pass, comp, round = get_current_round())
+get_games(user, pass, comp, round = NULL)
 }
 \arguments{
 \item{user}{monash username, in text}
@@ -20,4 +20,9 @@ data.frame of the matches from the currently available tipping round
 }
 \description{
 get_current_games provides an API to return the current rounds matches in a data frame.
+}
+\examples{
+\dontrun{
+get_games(user, pass, comp)
+}
 }

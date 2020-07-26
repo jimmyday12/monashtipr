@@ -14,6 +14,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' get_games(user, pass, comp)
+#' }
 get_games <- function(user, pass, comp, round = NULL) {
   
   if (is.null(round)) get_current_round(user, pass)
@@ -24,20 +27,24 @@ get_games <- function(user, pass, comp, round = NULL) {
 }
 
 
-#' Title
+#' Submit Tips
 #'
-#' @param games 
-#' @param user 
-#' @param pass 
-#' @param round 
-#' @param comp 
+#' @param games a table of games, ideally returned from `get_games`
+#' @param user monash username, in text
+#' @param pass monash password, in text
+#' @param comp comp type, should be one of "normal", "gauss" or "info"
+#' @param round (optional),  round number to return. If not provided, will try find the current round.
 #'
-#' @return
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' submit_tips(games, user, pass, comp)
+#' }
 submit_tips <- function(games, user, pass, comp, round = NULL) {
 
+  if (is.null(round)) get_current_round(user, pass)
+  
   # make request
   sess <- create_session()
   requ <- make_request(user, pass, comp, round = round)

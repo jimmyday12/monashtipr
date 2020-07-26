@@ -1,88 +1,76 @@
-#' Title
+#' Extract margin
 #'
-#' @param games_tbl 
+#' Internal function to extract margin
 #'
-#' @return
-#' @export
 #'
-#' @examples
+#' @noRd
 extract_margin <- function(games_tbl){
   marg_exists <- any(names(games_tbl) %in% "Margin")
   
   if (!marg_exists) rlang::abort("Margin column does not exist in `games_tbl`")
   margin_names <- paste0("margingame", 1:nrow(games_tbl))
-  setNames(as.list(games_tbl$Margin), margin_names)
+  stats::setNames(as.list(games_tbl$Margin), margin_names)
 }
 
-#' Title
+#' Extract which std
 #'
-#' @param games_tbl 
+#' Internal function to extract std
 #'
-#' @return
-#' @export
 #'
-#' @examples
+#' @noRd
 extract_std <- function(games_tbl){
   std_exists <- any(names(games_tbl) %in% "Std. Dev.")
   
   if (!std_exists) rlang::abort("Std Dev column does not exist in `games_tbl`")
   
   std_names <- paste0("stdgame", 1:nrow(games_tbl))
-  setNames(as.list(games_tbl$`Std. Dev.`), std_names)
+  stats::setNames(as.list(games_tbl$`Std. Dev.`), std_names)
 }
 
-#' Title
+#' Extract prob
 #'
-#' @param games_tbl 
+#' Internal function to extract prob
 #'
-#' @return
-#' @export
 #'
-#' @examples
+#' @noRd
 extract_prob <- function(games_tbl){
   prob_exists <- any(names(games_tbl) %in% "Probability")
   
   if (!prob_exists) rlang::abort("Probability column does not exist in `games_tbl`")
   prob_game_names <- paste0("game", 1:nrow(games_tbl))
-  setNames(as.list(games_tbl$Probability), prob_game_names)
+  stats::setNames(as.list(games_tbl$Probability), prob_game_names)
 }
 
-#' Title
+#' Extract which game
 #'
-#' @param games_tbl 
+#' Internal function to extract games
 #'
-#' @return
-#' @export
 #'
-#' @examples
+#' @noRd
 extract_which_game <- function(games_tbl){
   which_game_names <- paste0("whichgame", 1:nrow(games_tbl))
   games_tbl$game_result <- ifelse(games_tbl$Margin >= 0, "home", "away")
-  setNames(as.list(games_tbl$game_result), which_game_names)
+  stats::setNames(as.list(games_tbl$game_result), which_game_names)
 }
 
-#' Title
+#' Extract game
 #'
-#' @param games_tbl 
+#' Internal function to extract games
 #'
-#' @return
-#' @export
 #'
-#' @examples
+#' @noRd
 extract_games <- function(games_tbl){
   game_names <- paste0("game", 1:nrow(games_tbl))
   games_tbl$game_result <- ifelse(games_tbl$Margin > 0, "home", "away")
-  setNames(as.list(games_tbl$game_result), game_names)
+  stats::setNames(as.list(games_tbl$game_result), game_names)
 }
 
-#' Title
+#' Set away checkbox
 #'
-#' @param form 
+#' Internal function to eset checkbox
 #'
-#' @return
-#' @export
 #'
-#' @examples
+#' @noRd
 set_away_checkbox <- function(form) {
   names <- sapply(form$fields, function(x) '['(x, 'name')) %>% unlist() %>% unique()
   game_ids <- grepl("^game\\d$", names)
@@ -97,16 +85,12 @@ set_away_checkbox <- function(form) {
   return(form)
 }
 
-#' Title
+#' Convert tips to form
 #'
-#' @param games_tbl 
-#' @param form 
-#' @param comp 
+#' Internal function to convert tips to form
 #'
-#' @return
-#' @export
 #'
-#' @examples
+#' @noRd
 convert_tips_to_form <- function(games_tbl, form, comp) {
   
   if (comp == "info") {

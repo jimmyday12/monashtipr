@@ -2,24 +2,26 @@
 % Please edit documentation in R/main.R
 \name{submit_tips}
 \alias{submit_tips}
-\title{Title}
+\title{Submit Tips}
 \usage{
 submit_tips(games, user, pass, comp, round = NULL)
 }
 \arguments{
-\item{games}{}
+\item{games}{a table of games, ideally returned from \code{get_games}}
 
-\item{user}{}
+\item{user}{monash username, in text}
 
-\item{pass}{}
+\item{pass}{monash password, in text}
 
-\item{comp}{}
+\item{comp}{comp type, should be one of "normal", "gauss" or "info"}
 
-\item{round}{}
-}
-\value{
-
+\item{round}{(optional),  round number to return. If not provided, will try find the current round.}
 }
 \description{
-Title
+Submit Tips
+}
+\examples{
+\dontrun{
+submit_tips(games, user, pass, comp)
+}
 }

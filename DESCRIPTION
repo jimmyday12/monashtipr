@@ -15,7 +15,8 @@ Imports:
     rlang,
     xml2,
     glue,
-    lifecycle
+    lifecycle,
+    purrr
 Suggests: 
     testthat,
     covr
