@@ -3,9 +3,13 @@ home:
   description: Submit and update your tips to the Monash AFL Tipping Competition from R.
 
 template:
+  params:
+    bootswatch: flatly
+    ganalytics: UA-77406420-3
     twitter:
       creator: "@jamesday87"
       site: "@jamesday87"
       card: summary_large_image
 
 url: https://jimmyday12.github.io/monash_tipr
+
