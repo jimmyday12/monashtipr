@@ -1,0 +1,11 @@
+home:
+  title: An R API for the Monash AFL Tipping Competition
+  description: Submit and update your tips to the Monash AFL Tipping Competition from R.
+
+template:
+    twitter:
+      creator: "@jamesday87"
+      site: "@jamesday87"
+      card: summary_large_image
+
+url: https://jimmyday12.github.io/monash_tipr
