@@ -129,7 +129,7 @@ convert_tips_to_form <- function(games_tbl, form, comp) {
       params_list <- c(margin_list, game_list, std_list)
     }
     
-    form_filled <- rlang::exec(rvest::set_values, form = form, !!!params_list)
+    form_filled <- rlang::exec(rvest::set_values, form = form_filled, !!!params_list)
     return(form_filled)
   }
 }

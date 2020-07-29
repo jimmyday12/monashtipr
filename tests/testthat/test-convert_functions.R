@@ -12,8 +12,13 @@ test_that("Extract Normal Works", {
   expect_error(extract_std(game_tbl_norm))
   expect_error(extract_prob(game_tbl_norm))
 
-  game_tbl_norm$Margin <- 0
-  expect_s3_class(convert_tips_to_form(game_tbl_norm, form = form_norm, comp = "normal"), "form")
+  game_tbl_norm$Margin <- c(-1, 1, rep(0, times = nrow(game_tbl_norm) - 2))
+  form_filled <- convert_tips_to_form(game_tbl_norm, form = form_norm, comp = "normal")
+  expect_s3_class(form_filled, "form")
+  expect_equal(form_filled$fields$game1$value, "away")
+  expect_equal(form_filled$fields$game1$checked, "checked")
+  expect_equal(form_filled$fields$game2$value, "home")
+  expect_equal(form_filled$fields$game2$checked, "checked")
 })
 
 test_that("Extract Gauss Works", {
