@@ -82,7 +82,9 @@ set_away_checkbox <- function(form) {
     checked <- form$fields[[field]]$checked
     if (type == "radio" & value == "away" & is.null(checked)) {
       form$fields[[field]]$checked <- "checked"
+      
     }
+    #print(paste(value, form$fields[[field]]$checked))
   }
   return(form)
 }
@@ -100,20 +102,34 @@ convert_tips_to_form <- function(games_tbl, form, comp) {
     return(rlang::exec(rvest::set_values, form = form, !!!params_list))
   } else {
     margin_list <- extract_margin(games_tbl)
-    games_tbl$Margin <- abs(games_tbl$Margin)
-    margin_list <- extract_margin(games_tbl)
-
+    
+    
+    
     if (comp == "normal") {
       game_list <- extract_games(games_tbl)
       params_list <- c(margin_list, game_list)
     }
 
     if (comp == "gauss") {
-      std_list <- extract_std(games_tbl)
       game_list <- extract_which_game(games_tbl)
+      std_list <- extract_std(games_tbl)
       params_list <- c(margin_list, game_list, std_list)
     }
     form_filled <- rlang::exec(rvest::set_values, form = form, !!!params_list)
-    return(set_away_checkbox(form_filled))
+    form_filled <- set_away_checkbox(form_filled)
+    
+    games_tbl$Margin <- abs(games_tbl$Margin)
+    margin_list <- extract_margin(games_tbl)
+    
+    if (comp == "normal") {
+      params_list <- c(margin_list, game_list)
+    }
+    
+    if (comp == "gauss") {
+      params_list <- c(margin_list, game_list, std_list)
+    }
+    
+    form_filled <- rlang::exec(rvest::set_values, form = form, !!!params_list)
+    return(form_filled)
   }
 }

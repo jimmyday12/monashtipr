@@ -4,9 +4,17 @@
 \name{monashtipr-package}
 \alias{monashtipr}
 \alias{monashtipr-package}
-\title{monashtipr: What the Package Does (One Line, Title Case)}
+\title{monashtipr: An R API For The Monash AFL Tipping Competition}
 \description{
-What the package does (one paragraph).
+WSubmit and update your tips to the Monash AFL Tipping Competition from R.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://jimmyday12.github.io/monash_tipr/}
+  \item \url{https://github.com/jimmyday12/monash_tipr}
+}
+
 }
 \author{
 \strong{Maintainer}: James Day \email{jamesthomasday@gmail.com} (\href{https://orcid.org/0000-0003-3133-943X}{ORCID})
