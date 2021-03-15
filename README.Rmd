@@ -27,7 +27,7 @@ The goal of monashtipr is to provide an API to the Monash AFL Tipping competitio
 
 And the development version from [GitHub](https://github.com/) with:
 
-``` {r, echo = TRUE, results = 'hide'}
+``` {r, eval = FALSE, results = 'hide'}
 # install.packages("devtools")
 devtools::install_github("jimmyday12/monash_tipr")
 ```
@@ -68,7 +68,7 @@ games$Margin <- c(1, 6, 4, 4, 20, -1, -2, -12, -7)
 games
 ```
 
-Now we just pass this back with our original credentials and we are good to go! =
+Now we just pass this back with our original credentials and we are good to go! 
 
 ```{r submit_tips}
 submit_tips(games, user, pass, comp = comp)

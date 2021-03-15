@@ -6,7 +6,7 @@
 \alias{monashtipr-package}
 \title{monashtipr: An R API For The Monash AFL Tipping Competition}
 \description{
-WSubmit and update your tips to the Monash AFL Tipping Competition from R.
+Submit and update your tips to the Monash AFL Tipping Competition from R.
 }
 \seealso{
 Useful links:

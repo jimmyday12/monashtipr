@@ -103,8 +103,6 @@ convert_tips_to_form <- function(games_tbl, form, comp) {
   } else {
     margin_list <- extract_margin(games_tbl)
     
-    
-    
     if (comp == "normal") {
       game_list <- extract_games(games_tbl)
       params_list <- c(margin_list, game_list)
@@ -115,7 +113,11 @@ convert_tips_to_form <- function(games_tbl, form, comp) {
       std_list <- extract_std(games_tbl)
       params_list <- c(margin_list, game_list, std_list)
     }
-    form_filled <- rlang::exec(rvest::set_values, form = form, !!!params_list)
+    
+    form_filled <- rlang::exec(rvest::html_form_set, 
+                               form = form, 
+                               !!!params_list)
+    
     form_filled <- set_away_checkbox(form_filled)
     
     games_tbl$Margin <- abs(games_tbl$Margin)

@@ -23,7 +23,10 @@ get_rounds <- function() {
 #' @noRd
 get_current_round <- function(user, pass, rounds = get_rounds()) {
   valid_rounds <- rounds %>%
-    purrr::map(~ make_request(user, pass, comp = "normal", round = ., verbose = FALSE)) %>%
+    purrr::map(~make_request(user, pass,
+                              comp = "normal", 
+                              round = ., 
+                              verbose = FALSE)) %>%
     purrr::map_lgl(purrr::pluck, "table_exists")
 
   if (sum(valid_rounds) == 0) {
@@ -106,7 +109,7 @@ get_games_tbl <- function(req) {
 get_form <- function(req) {
   if (req$table_exists) {
     httr::content(req) %>%
-      rvest::html_node("form") %>%
+      rvest::html_element("form") %>%
       rvest::html_form()
   } else {
     rlang::abort("Invalid request made to `get_form`, most likely due to error in login credentials")
@@ -121,5 +124,5 @@ get_form <- function(req) {
 #' @noRd
 create_session <- function() {
   url <- "http://probabilistic-footy.monash.edu/~footy/cgi-bin/presentTips.cgi.pl"
-  rvest::html_session(url)
+  rvest::session(url)
 }

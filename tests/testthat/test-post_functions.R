@@ -31,13 +31,13 @@ test_that("Request returns valid results", {
   expect_s3_class(get_games_tbl(req_invalid_round), "data.frame")
   expect_error(get_games_tbl("1"))
 
-  expect_s3_class(get_form(req_norm), "form")
-  expect_s3_class(get_form(req_gauss), "form")
-  expect_s3_class(get_form(req_info), "form")
+  expect_s3_class(get_form(req_norm), "rvest_form")
+  expect_s3_class(get_form(req_gauss), "rvest_form")
+  expect_s3_class(get_form(req_info), "rvest_form")
   expect_error(get_form(req_invalid_round))
 })
 
 test_that("Checking session works", {
-  expect_s3_class(create_session(), "session")
+  expect_s3_class(create_session(), "rvest_session")
   expect_error(create_session("1"))
 })
