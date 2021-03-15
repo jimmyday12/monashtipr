@@ -26,6 +26,10 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Check
+        env:
+          _R_CHECK_CRAN_INCOMING_REMOTE_: false
+          MONASH_USER: ${{ secrets.MONASH_USER }}
+          MONASH_PASS: ${{ secrets.MONASH_PASS }}
         run: |
           options(crayon.enabled = TRUE)
           rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
