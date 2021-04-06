@@ -99,7 +99,7 @@ convert_tips_to_form <- function(games_tbl, form, comp) {
   if (comp == "info") {
     prob_list <- extract_prob(games_tbl)
     params_list <- prob_list
-    return(rlang::exec(rvest::set_values, form = form, !!!params_list))
+    return(rlang::exec(rvest::html_form_set, form = form, !!!params_list))
   } else {
     margin_list <- extract_margin(games_tbl)
     
@@ -131,7 +131,7 @@ convert_tips_to_form <- function(games_tbl, form, comp) {
       params_list <- c(margin_list, game_list, std_list)
     }
     
-    form_filled <- rlang::exec(rvest::set_values, form = form_filled, !!!params_list)
+    form_filled <- rlang::exec(rvest::html_form_set, form = form_filled, !!!params_list)
     return(form_filled)
   }
 }
