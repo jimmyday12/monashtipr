@@ -43,16 +43,25 @@ get_current_round <- function(user, pass, rounds = get_rounds()) {
 #' @noRd
 make_request <- function(user, pass, comp, round = NULL, verbose = TRUE) {
   if (is.null(round)) round <- get_current_round(user, pass)
-  url <- "http://probabilistic-footy.monash.edu/~footy/cgi-bin/presentTips.cgi.pl"
-  params <- list(name = user, passwd = pass, round = round, comp = comp)
 
   if (!comp %in% c("info", "normal", "gauss")) {
     rlang::abort(glue::glue("`{comp}` is not a value for argument \"comp\".
     \"comp\" must be one of `info`, `normal` or `gauss`"))
   }
 
-  req <- httr::POST(url, body = params, encode = "form")
-
+  url <-  rvest::read_html(
+    "https://probabilistic-footy.monash.edu/~footy/tips.shtml"
+  )
+  
+  login <- rvest::html_form(url)[[1]]
+  
+  params <- list(name = user, passwd = pass, round = round, comp = comp)
+  
+  login <- login %>% 
+    rvest::html_form_set(!!!params)
+  
+  req <- rvest::html_form_submit(login)
+  
   req <- check_request(req)
 
   if (verbose) rlang::inform(req$msg)
@@ -68,10 +77,15 @@ make_request <- function(user, pass, comp, round = NULL, verbose = TRUE) {
 check_request <- function(req) {
 
   # check for table
-  tables_count <- httr::content(req) %>%
-    rvest::html_nodes("form table") %>%
-    length()
-  req$table_exists <- tables_count > 0
+  tables <- rvest::read_html(req) %>%
+    rvest::html_table() 
+  
+  table_exists <- purrr::map(tables, names) %>%
+    purrr::map_lgl(~"Game" %in% .) %>%
+    any()
+  
+  req$table_exists <- table_exists
+  
   if (req$table_exists) {
     req$msg <- "Login succesfull!" # Add tick
   } else {
@@ -89,10 +103,16 @@ check_request <- function(req) {
 get_games_tbl <- function(req) {
   if (req$table_exists) {
     rlang::inform("Returning current rounds games below...")
-    games_tbl <- httr::content(req) %>%
-      rvest::html_nodes("form table") %>%
-      rvest::html_table() %>%
-      .[[1]]
+    
+    tables <- rvest::read_html(req) %>%
+      rvest::html_table() 
+    
+    # find table
+    table_id <- purrr::map(tables, names) %>%
+      purrr::map_lgl(~"Game" %in% .)
+    
+    games_tbl <- tables[[which(table_id)]]
+    
   } else {
     rlang::inform("Returning empty data frame")
     games_tbl <- data.frame()
