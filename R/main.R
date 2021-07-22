@@ -47,8 +47,8 @@ submit_tips <- function(games, user, pass, comp, round = NULL) {
   #sess <- create_session()
   requ <- make_request(user, pass, comp, round = round)
   form_unfilled <- get_form(requ)
-  form_unfilled$action <- paste0("http://probabilistic-footy.monash.edu",
-                                 form_unfilled$action)
+  #form_unfilled$action <- paste0("http://probabilistic-footy.monash.edu",
+  #                               form_unfilled$action)
   # add new fields
   form_filled <- convert_tips_to_form(games, form_unfilled, comp)
 
