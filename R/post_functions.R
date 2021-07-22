@@ -129,8 +129,8 @@ get_games_tbl <- function(req) {
 get_form <- function(req) {
   if (req$table_exists) {
     httr::content(req) %>%
-      rvest::html_element("form") %>%
-      rvest::html_form()
+      rvest::html_form(base_url = "https://probabilistic-footy.monash.edu/") %>%
+      .[[1]]
   } else {
     rlang::abort("Invalid request made to `get_form`, most likely due to error in login credentials")
   }

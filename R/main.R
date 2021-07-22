@@ -44,7 +44,7 @@ submit_tips <- function(games, user, pass, comp, round = NULL) {
   if (is.null(round)) round <- get_current_round(user, pass)
 
   # make request
-  sess <- create_session()
+  #sess <- create_session()
   requ <- make_request(user, pass, comp, round = round)
   form_unfilled <- get_form(requ)
   form_unfilled$action <- paste0("http://probabilistic-footy.monash.edu",
@@ -53,9 +53,16 @@ submit_tips <- function(games, user, pass, comp, round = NULL) {
   form_filled <- convert_tips_to_form(games, form_unfilled, comp)
 
   # submit
-  result <- rvest::session_submit(sess, form_filled)
-  result$response %>%
-    httr::content() %>%
-    rvest::html_node("h1+ table") %>%
+  resp <- rvest::html_form_submit(form_filled, submit = ".submit")
+  tables <- resp %>% 
+    httr::content() %>% 
     rvest::html_table()
+  
+  tables_ind <- tables %>%
+    purrr::map(names) %>% 
+    purrr::map_lgl(~"Game" %in% .)
+  
+  tables[[which(tables_ind)]]
+  
+  
 }
