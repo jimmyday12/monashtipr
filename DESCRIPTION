@@ -1,6 +1,6 @@
 Package: monashtipr
-Version: 0.0.1
-Title: An R API For The Monash AFL Tipping Competition
+Version: 0.0.1.9000
+Title: An R API for the Monash AFL Tipping Competition
 Description: Submit and update your tips to the Monash AFL Tipping Competition from R.
 Authors@R: person("James", "Day", email = "jamesthomasday@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3133-943X"))
 License: MIT + file LICENSE

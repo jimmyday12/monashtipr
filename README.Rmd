@@ -73,4 +73,6 @@ Now we just pass this back with our original credentials and we are good to go!
 ```{r submit_tips}
 submit_tips(games, user, pass, comp = comp)
 ```
+## Code of Conduct
 
+Please note that the monashtipr project is released with a [Contributor Code of Conduct](https://jimmyday12.github.io/monash_tipr/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

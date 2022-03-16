@@ -2,9 +2,13 @@
 ^monashtipr\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^README\.md$
 ^README\.Rmd$
 ^codecov\.yml$
 ^\.github$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^NEWS\.md$
+^cran-comments\.md$
+^CODE_OF_CONDUCT\.md$

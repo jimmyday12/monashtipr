@@ -59,18 +59,18 @@ games <- get_games(user, pass, comp = comp)
 #> Returning current rounds games below...
 
 games
-#> # A tibble: 9 x 5
-#>    Game Ground         Home        Away       Margin
-#>   <int> <chr>          <chr>       <chr>      <lgl> 
-#> 1     1 MCG            Richmond    Carlton    NA    
-#> 2     2 MCG            Collingwood W_Bulldogs NA    
-#> 3     3 MCG            Melbourne   Fremantle  NA    
-#> 4     4 Adelaide Oval  Adelaide    Geelong    NA    
-#> 5     5 Marvel Stadium Essendon    Hawthorn   NA    
-#> 6     6 Gabba          Brisbane    Sydney     NA    
-#> 7     7 Marvel Stadium Kangaroos   P_Adelaide NA    
-#> 8     8 GIANTS Stadium G_W_Sydney  St_Kilda   NA    
-#> 9     9 Optus Stadium  W_Coast     Gold_Coast NA
+#> # A tibble: 9 × 5
+#>    Game Ground                  Home       Away        Margin
+#>   <int> <chr>                   <chr>      <chr>       <lgl> 
+#> 1     1 MCG                     Melbourne  W_Bulldogs  NA    
+#> 2     2 MCG                     Carlton    Richmond    NA    
+#> 3     3 Marvel Stadium          St_Kilda   Collingwood NA    
+#> 4     4 MCG                     Geelong    Essendon    NA    
+#> 5     5 Accor Stadium Australia G_W_Sydney Sydney      NA    
+#> 6     6 Gabba                   Brisbane   P_Adelaide  NA    
+#> 7     7 MCG                     Hawthorn   Kangaroos   NA    
+#> 8     8 Adelaide Oval           Adelaide   Fremantle   NA    
+#> 9     9 Optus Stadium           W_Coast    Gold_Coast  NA
 ```
 
 Next - we edit the games data frame to add our tips. How you do this
@@ -83,18 +83,18 @@ Please note - these should always be the margin tip of the HOME TEAM.
 ``` r
 games$Margin <- c(1, 6, 4, 4, 20, -1, -2, -12, -7)
 games
-#> # A tibble: 9 x 5
-#>    Game Ground         Home        Away       Margin
-#>   <int> <chr>          <chr>       <chr>       <dbl>
-#> 1     1 MCG            Richmond    Carlton         1
-#> 2     2 MCG            Collingwood W_Bulldogs      6
-#> 3     3 MCG            Melbourne   Fremantle       4
-#> 4     4 Adelaide Oval  Adelaide    Geelong         4
-#> 5     5 Marvel Stadium Essendon    Hawthorn       20
-#> 6     6 Gabba          Brisbane    Sydney         -1
-#> 7     7 Marvel Stadium Kangaroos   P_Adelaide     -2
-#> 8     8 GIANTS Stadium G_W_Sydney  St_Kilda      -12
-#> 9     9 Optus Stadium  W_Coast     Gold_Coast     -7
+#> # A tibble: 9 × 5
+#>    Game Ground                  Home       Away        Margin
+#>   <int> <chr>                   <chr>      <chr>        <dbl>
+#> 1     1 MCG                     Melbourne  W_Bulldogs       1
+#> 2     2 MCG                     Carlton    Richmond         6
+#> 3     3 Marvel Stadium          St_Kilda   Collingwood      4
+#> 4     4 MCG                     Geelong    Essendon         4
+#> 5     5 Accor Stadium Australia G_W_Sydney Sydney          20
+#> 6     6 Gabba                   Brisbane   P_Adelaide      -1
+#> 7     7 MCG                     Hawthorn   Kangaroos       -2
+#> 8     8 Adelaide Oval           Adelaide   Fremantle      -12
+#> 9     9 Optus Stadium           W_Coast    Gold_Coast      -7
 ```
 
 Now we just pass this back with our original credentials and we are good
@@ -103,20 +103,23 @@ to go\!
 ``` r
 submit_tips(games, user, pass, comp = comp)
 #> Login succesfull!
-#> Warning: `set_values()` was deprecated in rvest 1.0.0.
-#> Please use `html_form_set()` instead.
-#> Warning: `submit_form()` was deprecated in rvest 1.0.0.
-#> Please use `session_submit()` instead.
-#> # A tibble: 9 x 4
-#>    Game Team        Margin Status  
-#>   <int> <chr>        <int> <chr>   
-#> 1     1 Richmond         1 Updated.
-#> 2     2 Collingwood      6 Updated.
-#> 3     3 Melbourne        4 Updated.
-#> 4     4 Adelaide         4 Updated.
-#> 5     5 Essendon        20 Updated.
-#> 6     6 Sydney           1 Updated.
-#> 7     7 P_Adelaide       2 Updated.
-#> 8     8 St_Kilda        12 Updated.
-#> 9     9 Gold_Coast       7 Updated.
+#> # A tibble: 9 × 4
+#>    Game Team       Margin Status  
+#>   <int> <chr>       <int> <chr>   
+#> 1     1 Melbourne       1 Updated.
+#> 2     2 Carlton         6 Updated.
+#> 3     3 St_Kilda        4 Updated.
+#> 4     4 Geelong         4 Updated.
+#> 5     5 G_W_Sydney     20 Updated.
+#> 6     6 P_Adelaide      1 Updated.
+#> 7     7 Kangaroos       2 Updated.
+#> 8     8 Fremantle      12 Updated.
+#> 9     9 Gold_Coast      7 Updated.
 ```
+
+## Code of Conduct
+
+Please note that the monashtipr project is released with a [Contributor
+Code of
+Conduct](https://jimmyday12.github.io/monash_tipr/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.

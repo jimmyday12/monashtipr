@@ -11,7 +11,9 @@ skip_if_no_auth <- function() {
 
 test_that("Get games works", {
   skip_if_offline()
+  skip_on_cran()
   skip_if_no_auth()
+  
   
   user <- Sys.getenv("MONASH_USER")
   pass <- Sys.getenv("MONASH_PASS")

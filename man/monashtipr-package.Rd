@@ -4,7 +4,7 @@
 \name{monashtipr-package}
 \alias{monashtipr}
 \alias{monashtipr-package}
-\title{monashtipr: An R API For The Monash AFL Tipping Competition}
+\title{monashtipr: An R API for the Monash AFL Tipping Competition}
 \description{
 Submit and update your tips to the Monash AFL Tipping Competition from R.
 }
