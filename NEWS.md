@@ -1,3 +1,5 @@
+# monashtipr 0.1.0
+
 # monashtipr 0.0.1
 
 * Fixed issue with rvest 1.0.0 that broke various functions due to deprecated code
