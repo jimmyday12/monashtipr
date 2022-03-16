@@ -5,7 +5,6 @@ Description: Submit and update your tips to the Monash AFL Tipping Competition f
 Authors@R: person("James", "Day", email = "jamesthomasday@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0003-3133-943X"))
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://jimmyday12.github.io/monash_tipr/, https://github.com/jimmyday12/monash_tipr
