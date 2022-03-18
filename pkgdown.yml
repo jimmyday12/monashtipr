@@ -1,8 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-07-22T03:49Z
+last_built: 2022-03-18T05:45Z
 urls:
   reference: https://jimmyday12.github.io/monash_tipr/reference
   article: https://jimmyday12.github.io/monash_tipr/articles

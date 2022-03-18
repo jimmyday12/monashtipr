@@ -25,6 +25,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,18 +39,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">monashtipr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -58,7 +54,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jimmyday12/monash_tipr/">
+  <a href="https://github.com/jimmyday12/monash_tipr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -75,27 +71,27 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="monashtipr" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#monashtipr" class="anchor"></a>monashtipr</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="monashtipr">monashtipr<a class="anchor" aria-label="anchor" href="#monashtipr"></a>
+</h1></div>
 <!-- badges: start -->
 
 <p>The goal of monashtipr is to provide an API to the Monash AFL Tipping competition.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jimmyday12/monash_tipr"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="workflow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#workflow" class="anchor"></a>Workflow</h2>
+<div class="section level2">
+<h2 id="workflow">Workflow<a class="anchor" aria-label="anchor" href="#workflow"></a>
+</h2>
 <p>The two main functions are <code><a href="reference/get_games.html">get_games()</a></code> and <code>submit_tips</code>. The general workflow is to use <code><a href="reference/get_games.html">get_games()</a></code> to grab a data frame of the games from a particular round, edit/add your tips and then submit them to the Monash website using <code>submit_tips</code>.</p>
-<p>First we pull down the games. I’ve chosen to store my password and username in an Renviron file here to keep them secret, but you could pass these in via plain text. Read up on options for this <a href="https://cran.r-project.org/web/packages/httr/vignettes/secrets.html">here</a></p>
+<p>First we pull down the games. I’ve chosen to store my password and username in an Renviron file here to keep them secret, but you could pass these in via plain text. Read up on options for this <a href="https://cran.r-project.org/web/packages/httr/vignettes/secrets.html" class="external-link">here</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jimmyday12.github.io/monash_tipr/">monashtipr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jimmyday12.github.io/monash_tipr/">monashtipr</a></span><span class="op">)</span>
 
 <span class="co"># Store password and username</span>
 <span class="co"># If wanted - store user/password in Renviron file</span>
@@ -103,8 +99,8 @@
 <span class="co"># MONASH_USER = xxx</span>
 <span class="co"># MONASH_PASS = xxx</span>
 
-<span class="va">user</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"MONASH_USER"</span><span class="op">)</span>
-<span class="va">pass</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"MONASH_PASS"</span><span class="op">)</span></code></pre></div>
+<span class="va">user</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"MONASH_USER"</span><span class="op">)</span>
+<span class="va">pass</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"MONASH_PASS"</span><span class="op">)</span></code></pre></div>
 <p>Now we can pull games.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">comp</span> <span class="op">=</span> <span class="st">"normal"</span>
@@ -113,99 +109,118 @@
 <span class="co">#&gt; Returning current rounds games below...</span>
 
 <span class="va">games</span>
-<span class="co">#&gt; # A tibble: 9 x 5</span>
-<span class="co">#&gt;    Game Ground         Home        Away       Margin</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt;      &lt;lgl&gt; </span>
-<span class="co">#&gt; 1     1 MCG            Richmond    Carlton    NA    </span>
-<span class="co">#&gt; 2     2 MCG            Collingwood W_Bulldogs NA    </span>
-<span class="co">#&gt; 3     3 MCG            Melbourne   Fremantle  NA    </span>
-<span class="co">#&gt; 4     4 Adelaide Oval  Adelaide    Geelong    NA    </span>
-<span class="co">#&gt; 5     5 Marvel Stadium Essendon    Hawthorn   NA    </span>
-<span class="co">#&gt; 6     6 Gabba          Brisbane    Sydney     NA    </span>
-<span class="co">#&gt; 7     7 Marvel Stadium Kangaroos   P_Adelaide NA    </span>
-<span class="co">#&gt; 8     8 GIANTS Stadium G_W_Sydney  St_Kilda   NA    </span>
-<span class="co">#&gt; 9     9 Optus Stadium  W_Coast     Gold_Coast NA</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 9 × 5</span>
+<span class="co">#&gt;    Game Ground                  Home       Away        Margin</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                   &lt;chr&gt;      &lt;chr&gt;       &lt;lgl&gt; </span>
+<span class="co">#&gt; 1     1 MCG                     Melbourne  W_Bulldogs  NA    </span>
+<span class="co">#&gt; 2     2 MCG                     Carlton    Richmond    NA    </span>
+<span class="co">#&gt; 3     3 Marvel Stadium          St_Kilda   Collingwood NA    </span>
+<span class="co">#&gt; 4     4 MCG                     Geelong    Essendon    NA    </span>
+<span class="co">#&gt; 5     5 Accor Stadium Australia G_W_Sydney Sydney      NA    </span>
+<span class="co">#&gt; 6     6 Gabba                   Brisbane   P_Adelaide  NA    </span>
+<span class="co">#&gt; 7     7 MCG                     Hawthorn   Kangaroos   NA    </span>
+<span class="co">#&gt; 8     8 Adelaide Oval           Adelaide   Fremantle   NA    </span>
+<span class="co">#&gt; 9     9 Optus Stadium           W_Coast    Gold_Coast  NA</span></code></pre></div>
 <p>Next - we edit the games data frame to add our tips. How you do this will vary by how you actually store your tips - you might do a join with your existing model output for example. I’ll leave that up to the user. A simple example would be to provide a vector of margins.</p>
 <p>Please note - these should always be the margin tip of the HOME TEAM.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">games</span><span class="op">$</span><span class="va">Margin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">20</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">12</span>, <span class="op">-</span><span class="fl">7</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">games</span><span class="op">$</span><span class="va">Margin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">20</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">12</span>, <span class="op">-</span><span class="fl">7</span><span class="op">)</span>
 <span class="va">games</span>
-<span class="co">#&gt; # A tibble: 9 x 5</span>
-<span class="co">#&gt;    Game Ground         Home        Away       Margin</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 MCG            Richmond    Carlton         1</span>
-<span class="co">#&gt; 2     2 MCG            Collingwood W_Bulldogs      6</span>
-<span class="co">#&gt; 3     3 MCG            Melbourne   Fremantle       4</span>
-<span class="co">#&gt; 4     4 Adelaide Oval  Adelaide    Geelong         4</span>
-<span class="co">#&gt; 5     5 Marvel Stadium Essendon    Hawthorn       20</span>
-<span class="co">#&gt; 6     6 Gabba          Brisbane    Sydney         -1</span>
-<span class="co">#&gt; 7     7 Marvel Stadium Kangaroos   P_Adelaide     -2</span>
-<span class="co">#&gt; 8     8 GIANTS Stadium G_W_Sydney  St_Kilda      -12</span>
-<span class="co">#&gt; 9     9 Optus Stadium  W_Coast     Gold_Coast     -7</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 9 × 5</span>
+<span class="co">#&gt;    Game Ground                  Home       Away        Margin</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                   &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     1 MCG                     Melbourne  W_Bulldogs       1</span>
+<span class="co">#&gt; 2     2 MCG                     Carlton    Richmond         6</span>
+<span class="co">#&gt; 3     3 Marvel Stadium          St_Kilda   Collingwood      4</span>
+<span class="co">#&gt; 4     4 MCG                     Geelong    Essendon         4</span>
+<span class="co">#&gt; 5     5 Accor Stadium Australia G_W_Sydney Sydney          20</span>
+<span class="co">#&gt; 6     6 Gabba                   Brisbane   P_Adelaide      -1</span>
+<span class="co">#&gt; 7     7 MCG                     Hawthorn   Kangaroos       -2</span>
+<span class="co">#&gt; 8     8 Adelaide Oval           Adelaide   Fremantle      -12</span>
+<span class="co">#&gt; 9     9 Optus Stadium           W_Coast    Gold_Coast      -7</span></code></pre></div>
 <p>Now we just pass this back with our original credentials and we are good to go!</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/submit_tips.html">submit_tips</a></span><span class="op">(</span><span class="va">games</span>, <span class="va">user</span>, <span class="va">pass</span>, comp <span class="op">=</span> <span class="va">comp</span><span class="op">)</span>
 <span class="co">#&gt; Login succesfull!</span>
-<span class="co">#&gt; Warning: `set_values()` was deprecated in rvest 1.0.0.</span>
-<span class="co">#&gt; Please use `html_form_set()` instead.</span>
-<span class="co">#&gt; Warning: `submit_form()` was deprecated in rvest 1.0.0.</span>
-<span class="co">#&gt; Please use `session_submit()` instead.</span>
-<span class="co">#&gt; # A tibble: 9 x 4</span>
-<span class="co">#&gt;    Game Team        Margin Status  </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;   </span>
-<span class="co">#&gt; 1     1 Richmond         1 Updated.</span>
-<span class="co">#&gt; 2     2 Collingwood      6 Updated.</span>
-<span class="co">#&gt; 3     3 Melbourne        4 Updated.</span>
-<span class="co">#&gt; 4     4 Adelaide         4 Updated.</span>
-<span class="co">#&gt; 5     5 Essendon        20 Updated.</span>
-<span class="co">#&gt; 6     6 Sydney           1 Updated.</span>
-<span class="co">#&gt; 7     7 P_Adelaide       2 Updated.</span>
-<span class="co">#&gt; 8     8 St_Kilda        12 Updated.</span>
-<span class="co">#&gt; 9     9 Gold_Coast       7 Updated.</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 9 × 4</span>
+<span class="co">#&gt;    Game Team       Margin Status  </span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;   </span>
+<span class="co">#&gt; 1     1 Melbourne       1 Updated.</span>
+<span class="co">#&gt; 2     2 Carlton         6 Updated.</span>
+<span class="co">#&gt; 3     3 St_Kilda        4 Updated.</span>
+<span class="co">#&gt; 4     4 Geelong         4 Updated.</span>
+<span class="co">#&gt; 5     5 G_W_Sydney     20 Updated.</span>
+<span class="co">#&gt; 6     6 P_Adelaide      1 Updated.</span>
+<span class="co">#&gt; 7     7 Kangaroos       2 Updated.</span>
+<span class="co">#&gt; 8     8 Fremantle      12 Updated.</span>
+<span class="co">#&gt; 9     9 Gold_Coast      7 Updated.</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
+<p>Please note that the monashtipr project is released with a <a href="https://jimmyday12.github.io/monash_tipr/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/jimmyday12/monash_tipr/">https://​github.com/​jimmyday12/​monash_tipr/​</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>James Day <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-3133-943X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://github.com/jimmyday12/monash_tipr/" class="external-link">Browse source code</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://codecov.io/gh/jimmyday12/monash_tipr?branch=master"><img src="https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://github.com/jimmyday12/monash_tipr/actions"><img src="https://github.com/jimmyday12/monash_tipr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing monashtipr</a></li>
+</ul>
+</div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>James Day <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-3133-943X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://codecov.io/gh/jimmyday12/monash_tipr?branch=master" class="external-link"><img src="https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/jimmyday12/monash_tipr/actions" class="external-link"><img src="https://github.com/jimmyday12/monash_tipr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by James Day.</p>
+  <p></p>
+<p>Developed by James Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -213,6 +228,8 @@
 
   
 
+
+  
 
   </body>
 </html>

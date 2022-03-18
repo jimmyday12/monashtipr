@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jimmyday12.github.io/monash_tipr/404.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/monash_tipr/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/monash_tipr/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/monash_tipr/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/monash_tipr/authors.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/monash_tipr/index.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/monash_tipr/news/index.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/monash_tipr/reference/get_games.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/monash_tipr/reference/index.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/monash_tipr/reference/monashtipr-package.html</loc>
