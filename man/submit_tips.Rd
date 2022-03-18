@@ -17,6 +17,9 @@ submit_tips(games, user, pass, comp, round = NULL)
 
 \item{round}{(optional),  round number to return. If not provided, will try find the current round.}
 }
+\value{
+A tibble, containing the games and tips submitted via the API with a status column
+}
 \description{
 Submit Tips
 }

@@ -16,7 +16,7 @@ get_games(user, pass, comp, round = NULL)
 \item{round}{(optional),  round number to return. If not provided, will try find the current round.}
 }
 \value{
-data.frame of the matches from the currently available tipping round
+A tibble, containing the matches from the currently available tipping round
 }
 \description{
 get_current_games provides an API to return the current rounds matches in a data frame.

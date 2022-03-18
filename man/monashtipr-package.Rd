@@ -4,9 +4,11 @@
 \name{monashtipr-package}
 \alias{monashtipr}
 \alias{monashtipr-package}
-\title{monashtipr: An R API for the Monash AFL Tipping Competition}
+\title{monashtipr: An R API Wrapper for the Monash University Probabilistic Footy Tipping Competition}
 \description{
-Submit and update your tips to the Monash AFL Tipping Competition from R.
+An API wrapper for the 'Monash University Probabilistic Footy 
+    Tipping Competition' <https://probabilistic-footy.monash.edu/~footy/index.shtml>. 
+    Allows users to submit tips directly to the competition from R.
 }
 \seealso{
 Useful links:
