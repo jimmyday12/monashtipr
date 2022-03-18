@@ -10,7 +10,7 @@
 #' @param comp comp type, should be one of "normal", "gauss" or "info"
 #' @param round (optional),  round number to return. If not provided, will try find the current round.
 #'
-#' @return data.frame of the matches from the currently available tipping round
+#' @return A tibble, containing the matches from the currently available tipping round
 #' @export
 #'
 #' @examples
@@ -35,7 +35,7 @@ get_games <- function(user, pass, comp, round = NULL) {
 #' @param round (optional),  round number to return. If not provided, will try find the current round.
 #'
 #' @export
-#'
+#' @return A tibble, containing the games and tips submitted via the API with a status column
 #' @examples
 #' \dontrun{
 #' submit_tips(games, user, pass, comp)
