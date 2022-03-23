@@ -13,8 +13,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 downloads](https://cranlogs.r-pkg.org/badges/monashtipr)](https://www.r-pkg.org/pkg/monashtipr)
 [![CRAN RStudio total
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/monashtipr)](https://www.r-pkg.org/pkg/monashtipr)
-[![R build
-status](https://github.com/jimmyday12/monash_tipr/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/monash_tipr/actions)
+[![R-CMD-check](https://github.com/jimmyday12/monashtipr/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/monashtipr/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg)](https://codecov.io/gh/jimmyday12/monash_tipr?branch=master)
 
