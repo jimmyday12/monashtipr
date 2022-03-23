@@ -76,21 +76,25 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of monashtipr is to provide an API to the Monash AFL Tipping competition.</p>
+<!-- badges: end -->
+<p>The goal of <code>monashtipr</code> is to provide an R based API that allows users to submit tips to the <a href="https://probabilistic-footy.monash.edu/~footy/" class="external-link">Monash University Probabilistic Footy Tipping Competition</a> from R.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>Install the released version of <code>monashtipr</code> from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"monashtipr"</span><span class="op">)</span></code></pre></div>
+<p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jimmyday12/monash_tipr"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jimmyday12/monashtipr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="workflow">Workflow<a class="anchor" aria-label="anchor" href="#workflow"></a>
 </h2>
 <p>The two main functions are <code><a href="reference/get_games.html">get_games()</a></code> and <code>submit_tips</code>. The general workflow is to use <code><a href="reference/get_games.html">get_games()</a></code> to grab a data frame of the games from a particular round, edit/add your tips and then submit them to the Monash website using <code>submit_tips</code>.</p>
 <p>First we pull down the games. I’ve chosen to store my password and username in an Renviron file here to keep them secret, but you could pass these in via plain text. Read up on options for this <a href="https://cran.r-project.org/web/packages/httr/vignettes/secrets.html" class="external-link">here</a></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jimmyday12.github.io/monash_tipr/">monashtipr</a></span><span class="op">)</span>
 
 <span class="co"># Store password and username</span>
@@ -102,7 +106,7 @@
 <span class="va">user</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"MONASH_USER"</span><span class="op">)</span>
 <span class="va">pass</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"MONASH_PASS"</span><span class="op">)</span></code></pre></div>
 <p>Now we can pull games.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">comp</span> <span class="op">=</span> <span class="st">"normal"</span>
 <span class="va">games</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_games.html">get_games</a></span><span class="op">(</span><span class="va">user</span>, <span class="va">pass</span>, comp <span class="op">=</span> <span class="va">comp</span><span class="op">)</span>
 <span class="co">#&gt; Login succesfull!</span>
@@ -110,50 +114,50 @@
 
 <span class="va">games</span>
 <span class="co">#&gt; # A tibble: 9 × 5</span>
-<span class="co">#&gt;    Game Ground                  Home       Away        Margin</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                   &lt;chr&gt;      &lt;chr&gt;       &lt;lgl&gt; </span>
-<span class="co">#&gt; 1     1 MCG                     Melbourne  W_Bulldogs  NA    </span>
-<span class="co">#&gt; 2     2 MCG                     Carlton    Richmond    NA    </span>
-<span class="co">#&gt; 3     3 Marvel Stadium          St_Kilda   Collingwood NA    </span>
-<span class="co">#&gt; 4     4 MCG                     Geelong    Essendon    NA    </span>
-<span class="co">#&gt; 5     5 Accor Stadium Australia G_W_Sydney Sydney      NA    </span>
-<span class="co">#&gt; 6     6 Gabba                   Brisbane   P_Adelaide  NA    </span>
-<span class="co">#&gt; 7     7 MCG                     Hawthorn   Kangaroos   NA    </span>
-<span class="co">#&gt; 8     8 Adelaide Oval           Adelaide   Fremantle   NA    </span>
-<span class="co">#&gt; 9     9 Optus Stadium           W_Coast    Gold_Coast  NA</span></code></pre></div>
+<span class="co">#&gt;    Game Ground           Home        Away       Margin</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;      &lt;lgl&gt; </span>
+<span class="co">#&gt; 1     1 Marvel Stadium   W_Bulldogs  Carlton    NA    </span>
+<span class="co">#&gt; 2     2 SCG              Sydney      Geelong    NA    </span>
+<span class="co">#&gt; 3     3 MCG              Collingwood Adelaide   NA    </span>
+<span class="co">#&gt; 4     4 Marvel Stadium   Essendon    Brisbane   NA    </span>
+<span class="co">#&gt; 5     5 Adelaide Oval    P_Adelaide  Hawthorn   NA    </span>
+<span class="co">#&gt; 6     6 Metricon Stadium Gold_Coast  Melbourne  NA    </span>
+<span class="co">#&gt; 7     7 Marvel Stadium   Kangaroos   W_Coast    NA    </span>
+<span class="co">#&gt; 8     8 MCG              Richmond    G_W_Sydney NA    </span>
+<span class="co">#&gt; 9     9 Optus Stadium    Fremantle   St_Kilda   NA</span></code></pre></div>
 <p>Next - we edit the games data frame to add our tips. How you do this will vary by how you actually store your tips - you might do a join with your existing model output for example. I’ll leave that up to the user. A simple example would be to provide a vector of margins.</p>
 <p>Please note - these should always be the margin tip of the HOME TEAM.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">games</span><span class="op">$</span><span class="va">Margin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">20</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">12</span>, <span class="op">-</span><span class="fl">7</span><span class="op">)</span>
 <span class="va">games</span>
 <span class="co">#&gt; # A tibble: 9 × 5</span>
-<span class="co">#&gt;    Game Ground                  Home       Away        Margin</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                   &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     1 MCG                     Melbourne  W_Bulldogs       1</span>
-<span class="co">#&gt; 2     2 MCG                     Carlton    Richmond         6</span>
-<span class="co">#&gt; 3     3 Marvel Stadium          St_Kilda   Collingwood      4</span>
-<span class="co">#&gt; 4     4 MCG                     Geelong    Essendon         4</span>
-<span class="co">#&gt; 5     5 Accor Stadium Australia G_W_Sydney Sydney          20</span>
-<span class="co">#&gt; 6     6 Gabba                   Brisbane   P_Adelaide      -1</span>
-<span class="co">#&gt; 7     7 MCG                     Hawthorn   Kangaroos       -2</span>
-<span class="co">#&gt; 8     8 Adelaide Oval           Adelaide   Fremantle      -12</span>
-<span class="co">#&gt; 9     9 Optus Stadium           W_Coast    Gold_Coast      -7</span></code></pre></div>
+<span class="co">#&gt;    Game Ground           Home        Away       Margin</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     1 Marvel Stadium   W_Bulldogs  Carlton         1</span>
+<span class="co">#&gt; 2     2 SCG              Sydney      Geelong         6</span>
+<span class="co">#&gt; 3     3 MCG              Collingwood Adelaide        4</span>
+<span class="co">#&gt; 4     4 Marvel Stadium   Essendon    Brisbane        4</span>
+<span class="co">#&gt; 5     5 Adelaide Oval    P_Adelaide  Hawthorn       20</span>
+<span class="co">#&gt; 6     6 Metricon Stadium Gold_Coast  Melbourne      -1</span>
+<span class="co">#&gt; 7     7 Marvel Stadium   Kangaroos   W_Coast        -2</span>
+<span class="co">#&gt; 8     8 MCG              Richmond    G_W_Sydney    -12</span>
+<span class="co">#&gt; 9     9 Optus Stadium    Fremantle   St_Kilda       -7</span></code></pre></div>
 <p>Now we just pass this back with our original credentials and we are good to go!</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/submit_tips.html">submit_tips</a></span><span class="op">(</span><span class="va">games</span>, <span class="va">user</span>, <span class="va">pass</span>, comp <span class="op">=</span> <span class="va">comp</span><span class="op">)</span>
 <span class="co">#&gt; Login succesfull!</span>
 <span class="co">#&gt; # A tibble: 9 × 4</span>
-<span class="co">#&gt;    Game Team       Margin Status  </span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;   </span>
-<span class="co">#&gt; 1     1 Melbourne       1 Updated.</span>
-<span class="co">#&gt; 2     2 Carlton         6 Updated.</span>
-<span class="co">#&gt; 3     3 St_Kilda        4 Updated.</span>
-<span class="co">#&gt; 4     4 Geelong         4 Updated.</span>
-<span class="co">#&gt; 5     5 G_W_Sydney     20 Updated.</span>
-<span class="co">#&gt; 6     6 P_Adelaide      1 Updated.</span>
-<span class="co">#&gt; 7     7 Kangaroos       2 Updated.</span>
-<span class="co">#&gt; 8     8 Fremantle      12 Updated.</span>
-<span class="co">#&gt; 9     9 Gold_Coast      7 Updated.</span></code></pre></div>
+<span class="co">#&gt;    Game Team        Margin Status  </span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;   </span>
+<span class="co">#&gt; 1     1 W_Bulldogs       1 Updated.</span>
+<span class="co">#&gt; 2     2 Sydney           6 Updated.</span>
+<span class="co">#&gt; 3     3 Collingwood      4 Updated.</span>
+<span class="co">#&gt; 4     4 Essendon         4 Updated.</span>
+<span class="co">#&gt; 5     5 P_Adelaide      20 Updated.</span>
+<span class="co">#&gt; 6     6 Melbourne        1 Updated.</span>
+<span class="co">#&gt; 7     7 W_Coast          2 Updated.</span>
+<span class="co">#&gt; 8     8 G_W_Sydney      12 Updated.</span>
+<span class="co">#&gt; 9     9 St_Kilda         7 Updated.</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
@@ -167,6 +171,7 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=monashtipr" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/jimmyday12/monash_tipr/" class="external-link">Browse source code</a></li>
 </ul>
 </div>
@@ -203,9 +208,12 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://codecov.io/gh/jimmyday12/monash_tipr?branch=master" class="external-link"><img src="https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://CRAN.R-project.org/package=monashtipr" class="external-link"><img src="https://www.r-pkg.org/badges/version/monashtipr" alt="CRAN status"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/monashtipr" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/monashtipr" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/monashtipr" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/monashtipr" alt="CRAN RStudio total downloads"></a></li>
 <li><a href="https://github.com/jimmyday12/monash_tipr/actions" class="external-link"><img src="https://github.com/jimmyday12/monash_tipr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/jimmyday12/monash_tipr?branch=master" class="external-link"><img src="https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 
