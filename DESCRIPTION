@@ -11,7 +11,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://jimmyday12.github.io/monash_tipr/, https://github.com/jimmyday12/monash_tipr
 Imports: 
-    rvest,
+    rvest, 
     httr,
     magrittr,
     rlang,
