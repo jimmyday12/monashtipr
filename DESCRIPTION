@@ -1,5 +1,5 @@
 Package: monashtipr
-Version: 0.1.0
+Version: 0.1.0.9000
 Title: An R API Wrapper for the Monash University Probabilistic Footy Tipping Competition
 Description: An API wrapper for the 'Monash University Probabilistic Footy 
     Tipping Competition' <https://probabilistic-footy.monash.edu/~footy/index.shtml>. 
