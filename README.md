@@ -16,7 +16,7 @@ downloads](https://cranlogs.r-pkg.org/badges/grand-total/monashtipr)](https://ww
 [![R-CMD-check](https://github.com/jimmyday12/monashtipr/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/monashtipr/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg)](https://codecov.io/gh/jimmyday12/monash_tipr?branch=master)
-
+[![R-CMD-check](https://github.com/jimmyday12/monashtipr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jimmyday12/monashtipr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `monashtipr` is to provide an R based API that allows users
@@ -68,23 +68,21 @@ Now we can pull games.
 ``` r
 comp = "normal"
 games <- get_games(user, pass, comp = comp)
-#> Login succesfull!
-#> Returning current rounds games below...
-
 games
-#> # A tibble: 9 × 5
-#>    Game Ground           Home        Away       Margin
-#>   <int> <chr>            <chr>       <chr>      <lgl> 
-#> 1     1 Marvel Stadium   W_Bulldogs  Carlton    NA    
-#> 2     2 SCG              Sydney      Geelong    NA    
-#> 3     3 MCG              Collingwood Adelaide   NA    
-#> 4     4 Marvel Stadium   Essendon    Brisbane   NA    
-#> 5     5 Adelaide Oval    P_Adelaide  Hawthorn   NA    
-#> 6     6 Metricon Stadium Gold_Coast  Melbourne  NA    
-#> 7     7 Marvel Stadium   Kangaroos   W_Coast    NA    
-#> 8     8 MCG              Richmond    G_W_Sydney NA    
-#> 9     9 Optus Stadium    Fremantle   St_Kilda   NA
 ```
+
+    #> # A tibble: 9 × 5
+    #>    Game Ground                Home        Away       Margin
+    #>   <dbl> <chr>                 <chr>       <chr>      <lgl> 
+    #> 1     1 MCG                   Carlton     Richmond   NA    
+    #> 2     2 MCG                   Collingwood Sydney     NA    
+    #> 3     3 MCG                   Essendon    Hawthorn   NA    
+    #> 4     4 GIANTS Stadium        G_W_Sydney  Kangaroos  NA    
+    #> 5     5 GMHBA Stadium         Geelong     St_Kilda   NA    
+    #> 6     6 Heritage Bank Stadium Gold_Coast  Adelaide   NA    
+    #> 7     7 MCG                   Melbourne   W_Bulldogs NA    
+    #> 8     8 Adelaide Oval         P_Adelaide  W_Coast    NA    
+    #> 9     9 Optus Stadium         Fremantle   Brisbane   NA
 
 Next - we edit the games data frame to add our tips. How you do this
 will vary by how you actually store your tips - you might do a join with
@@ -97,37 +95,24 @@ Please note - these should always be the margin tip of the HOME TEAM.
 games$Margin <- c(1, 6, 4, 4, 20, -1, -2, -12, -7)
 games
 #> # A tibble: 9 × 5
-#>    Game Ground           Home        Away       Margin
-#>   <int> <chr>            <chr>       <chr>       <dbl>
-#> 1     1 Marvel Stadium   W_Bulldogs  Carlton         1
-#> 2     2 SCG              Sydney      Geelong         6
-#> 3     3 MCG              Collingwood Adelaide        4
-#> 4     4 Marvel Stadium   Essendon    Brisbane        4
-#> 5     5 Adelaide Oval    P_Adelaide  Hawthorn       20
-#> 6     6 Metricon Stadium Gold_Coast  Melbourne      -1
-#> 7     7 Marvel Stadium   Kangaroos   W_Coast        -2
-#> 8     8 MCG              Richmond    G_W_Sydney    -12
-#> 9     9 Optus Stadium    Fremantle   St_Kilda       -7
+#>    Game Ground                Home        Away       Margin
+#>   <dbl> <chr>                 <chr>       <chr>       <dbl>
+#> 1     1 MCG                   Carlton     Richmond        1
+#> 2     2 MCG                   Collingwood Sydney          6
+#> 3     3 MCG                   Essendon    Hawthorn        4
+#> 4     4 GIANTS Stadium        G_W_Sydney  Kangaroos       4
+#> 5     5 GMHBA Stadium         Geelong     St_Kilda       20
+#> 6     6 Heritage Bank Stadium Gold_Coast  Adelaide       -1
+#> 7     7 MCG                   Melbourne   W_Bulldogs     -2
+#> 8     8 Adelaide Oval         P_Adelaide  W_Coast       -12
+#> 9     9 Optus Stadium         Fremantle   Brisbane       -7
 ```
 
 Now we just pass this back with our original credentials and we are good
-to go\!
+to go!
 
 ``` r
 submit_tips(games, user, pass, comp = comp)
-#> Login succesfull!
-#> # A tibble: 9 × 4
-#>    Game Team        Margin Status  
-#>   <int> <chr>        <int> <chr>   
-#> 1     1 W_Bulldogs       1 Updated.
-#> 2     2 Sydney           6 Updated.
-#> 3     3 Collingwood      4 Updated.
-#> 4     4 Essendon         4 Updated.
-#> 5     5 P_Adelaide      20 Updated.
-#> 6     6 Melbourne        1 Updated.
-#> 7     7 W_Coast          2 Updated.
-#> 8     8 G_W_Sydney      12 Updated.
-#> 9     9 St_Kilda         7 Updated.
 ```
 
 ## Code of Conduct

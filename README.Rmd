@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![CRAN RStudio total downloads](https://cranlogs.r-pkg.org/badges/grand-total/monashtipr)](https://www.r-pkg.org/pkg/monashtipr)
 [![R-CMD-check](https://github.com/jimmyday12/monashtipr/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/monashtipr/actions)
 [![Codecov test coverage](https://codecov.io/gh/jimmyday12/monash_tipr/branch/master/graph/badge.svg)](https://codecov.io/gh/jimmyday12/monash_tipr?branch=master)
-
+[![R-CMD-check](https://github.com/jimmyday12/monashtipr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jimmyday12/monashtipr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `monashtipr` is to provide an R based API that allows users to submit tips to the [Monash University Probabilistic Footy Tipping Competition](https://probabilistic-footy.monash.edu/~footy/) from R. 
@@ -63,12 +63,31 @@ pass =  Sys.getenv("MONASH_PASS")
 ```
 
 Now we can pull games. 
-```{r get_games}
+
+```{r get_games, eval=FALSE, include=TRUE}
 comp = "normal"
 games <- get_games(user, pass, comp = comp)
-
 games
 ```
+```{r show_games, echo=FALSE}
+games <- tibble::tribble(
+   ~Game,   ~Ground,                 ~Home,         ~Away,        ~Margin,
+   1,       "MCG",                   "Carlton",     "Richmond",   NA,
+   2,       "MCG",                   "Collingwood", "Sydney",     NA,
+   3,       "MCG",                   "Essendon",    "Hawthorn",   NA,
+   4,       "GIANTS Stadium",        "G_W_Sydney",  "Kangaroos",  NA,
+   5,       "GMHBA Stadium",         "Geelong",     "St_Kilda",   NA,
+   6,       "Heritage Bank Stadium", "Gold_Coast",  "Adelaide",   NA,
+   7,       "MCG",                   "Melbourne",   "W_Bulldogs", NA,
+   8,       "Adelaide Oval",         "P_Adelaide",  "W_Coast",    NA,
+   9,       "Optus Stadium",         "Fremantle",   "Brisbane",   NA
+  )
+
+games
+
+```
+
+
 
 Next - we edit the games data frame to add our tips. How you do this will vary by how you actually store your tips - you might do a join with your existing model output for example. I'll leave that up to the user. A simple example would be to provide a vector of margins. 
 
@@ -81,7 +100,7 @@ games
 
 Now we just pass this back with our original credentials and we are good to go! 
 
-```{r submit_tips}
+```{r submit_tips, eval=FALSE, include=TRUE}
 submit_tips(games, user, pass, comp = comp)
 ```
 ## Code of Conduct
